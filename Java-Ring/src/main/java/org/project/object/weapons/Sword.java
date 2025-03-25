@@ -4,23 +4,18 @@ import org.project.entity.Entity;
 
 import java.util.ArrayList;
 
-// TODO: UPDATE IMPLEMENTATION
-public class Sword {
-    /*
-    THIS IS AN EXAMPLE OF A WEAPON DESIGN.
-    */
+public class Sword extends Weapon{
 
-    int abilityCharge;
 
-    public Sword() {
-        // TODO: DESIGN SWORD'S ATTRIBUTES IMPLEMENT THE CONSTRUCTOR
+    //constructor
+    public Sword(int damage) {
+        super(damage);
     }
 
-    // TODO: (BONUS) UPDATE THE UNIQUE ABILITY
-    public void uniqueAbility(ArrayList<Entity> targets) {
-        abilityCharge += 2;
-        for (Entity target : targets) {
-            target.takeDamage(getDamage());
-        }
+
+    @Override
+    public String toString() {
+        return "Sword lvl." + super.getLvl() + " Damage: " + super.getDamage();
     }
+
 }

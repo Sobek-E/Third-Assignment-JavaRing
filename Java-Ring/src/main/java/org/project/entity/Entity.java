@@ -1,21 +1,29 @@
 package org.project.entity;
 
-public interface Entity {
-    void attack(Entity target);
+import org.project.object.weapons.Weapon;
 
-    void defend();
+public interface Entity {
+    void reset();
+
+    void attack(Entity target);
 
     void heal(int health);
 
-    void fillMana(int mana);
+    void Special(Entity target);
 
     void takeDamage(int damage);
 
+
+
+    //getters
+    Weapon getWeapon();
+    int getHP();
     int getMaxHP();
+    int getLevel();
+    boolean isDefending();
+    boolean isDead();
 
-    int getMaxMP();
+    //setters
+    void DefendStatusChange();
 
-    /*
-    TODO: ADD OTHER REQUIRED AND BONUS METHODS
-    */
 }

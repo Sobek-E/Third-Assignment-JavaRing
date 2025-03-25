@@ -1,16 +1,12 @@
 package org.project.object.consumables;
 
-import org.project.entity.Entity;
+import org.project.object.Object;
 
 // TODO: UPDATE IMPLEMENTATION
-public class Flask {
-    /*
-    THIS IS AN EXAMPLE OF A CONSUMABLE DESIGN.
-    */
+public abstract class Consumable implements Object {
+    private boolean consumed;
 
-    // TODO: (BONUS) UPDATE USE METHOD
-    @Override
-    public void use(Entity target) {
-        target.heal(target.getMaxHP() / 10);
+    public void Consume() {
+        consumed = true;
     }
 }

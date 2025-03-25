@@ -7,23 +7,15 @@ import java.util.ArrayList;
 public class Location {
     private String name;
 
-    private ArrayList<Enemy> enemies;
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
-    public Location(ArrayList<Location> locations, ArrayList<Enemy> enemies) {
-        this.locations = locations;
-        this.enemies = enemies;
+    public Location( ArrayList<Enemy> tempEnemies,String name) {
+        enemies.addAll(tempEnemies);
+        this.name = name;
     }
-
-    /*
-    TODO: (BONUS) RESET EACH LOCATION AFTER PLAYER LEAVES
-    */
 
     public String getName() {
         return name;
-    }
-
-    public ArrayList<Location> getLocations() {
-        return locations;
     }
 
     public ArrayList<Enemy> getEnemies() {
