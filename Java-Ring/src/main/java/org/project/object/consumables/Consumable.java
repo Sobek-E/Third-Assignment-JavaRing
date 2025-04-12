@@ -1,12 +1,13 @@
 package org.project.object.consumables;
 
-import org.project.object.Object;
+public abstract class Consumable {
+    protected int healAmount;
 
-// TODO: UPDATE IMPLEMENTATION
-public abstract class Consumable implements Object {
-    private boolean consumed;
+    public Consumable(int healAmount) {
+        this.healAmount = healAmount;
+    }
 
-    public void Consume() {
-        consumed = true;
+    public int getHealAmount() {
+        return healAmount;
     }
 }

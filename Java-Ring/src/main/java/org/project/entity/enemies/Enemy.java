@@ -1,97 +1,43 @@
 package org.project.entity.enemies;
 
-import org.project.entity.Entity;
 import org.project.object.weapons.Weapon;
-import java.lang.Math;
 
-import static java.lang.Math.min;
+public abstract class Enemy {
+    protected int hp;
+    protected int mp;
+    protected Weapon weapon;
 
-public abstract class Enemy implements Entity {
-    Weapon weapon;
-    private int lvl;
-    private int hp;
-    private final int MaxHP;
-    private boolean IsDefending=false;
-    protected boolean IsDead=false;
-
-    //constructor
-    public Enemy(int lvl,double hpMult, Weapon weapon) {
-        this.lvl=lvl;
-        this.hp = (int)(lvl*hpMult)*100;
-        this.MaxHP = this.hp;
+    public Enemy(int hp, int mp, Weapon weapon) {
+        this.hp = hp;
+        this.mp = mp;
         this.weapon = weapon;
     }
 
-    //resets player's status each round
-    @Override
-    public void reset()
-    {
-        this.IsDefending=false;
-    }
-
-    //taking damage
-    @Override
     public void takeDamage(int damage) {
-        if(!IsDefending) {
-            hp -= damage;
-        }
-        else {
-            hp -= damage/(int)(Math.sqrt(lvl)*2);
-        }
-        if(this.hp <= 0) {
-            IsDead=true;
-            this.hp = 0;
+        hp -= damage;
+        System.out.println(getClass().getSimpleName() + " took " + damage + " damage!");
+        if (hp <= 0) {
+            System.out.println(getClass().getSimpleName() + " has been defeated!");
         }
     }
 
-    //attack
-    @Override
-    public void attack(Entity target) {
-        int damage = (int)((getWeapon().getDamage())*(Math.sqrt(getLevel())));
-        target.takeDamage(damage);
+    public boolean isAlive() {
+        return hp > 0;
     }
 
-    //heal
-    @Override
-    public void heal(int health) {
-        hp = min(hp + health, MaxHP);
-    }
-
-
-    //getter methods
-    @Override
-    public boolean isDefending(){
-        return IsDefending;
-    }
-    @Override
-    public int getHP() {
+    public int getHp() {
         return hp;
     }
-    public int getLevel(){
-        return lvl;
+
+    public int getMp() {
+        return mp;
     }
-    public int getMaxHP() {
-        return MaxHP;
-    }
+
     public Weapon getWeapon() {
         return weapon;
     }
-    public boolean isDead() {
-        return IsDead;
-    }
-    public boolean isResurrected()
-    {
-        return false;
-    }
-    //getting enemy status
-    abstract public String getStatus();
 
-    //setter methods
-    public void setLevel(int lvl){
-        this.lvl=lvl;
-    }
-    public void DefendStatusChange() {
-        IsDefending = !IsDefending;
-    }
+    public abstract void attack(org.project.entity.players.Player player);
 
+    public abstract void useSpecialAbility(org.project.entity.players.Player player);
 }

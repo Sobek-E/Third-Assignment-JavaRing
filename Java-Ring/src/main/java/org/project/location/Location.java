@@ -1,16 +1,9 @@
 package org.project.location;
 
-import org.project.entity.enemies.Enemy;
-
-import java.util.ArrayList;
-
 public class Location {
     private String name;
 
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-
-    public Location( ArrayList<Enemy> tempEnemies,String name) {
-        enemies.addAll(tempEnemies);
+    public Location(String name) {
         this.name = name;
     }
 
@@ -18,7 +11,7 @@ public class Location {
         return name;
     }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
+    public void enter() {
+        System.out.println("You have entered " + name + "...");
     }
 }

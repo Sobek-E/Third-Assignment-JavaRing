@@ -1,55 +1,34 @@
 package org.project.entity.enemies;
 
-import org.project.entity.Entity;
+import org.project.entity.players.Player;
 import org.project.object.weapons.Weapon;
 
-import static java.lang.Math.min;
-
 public class Skeleton extends Enemy {
+    private boolean resurrected = false;
 
-    private boolean Resurrected = false;
-    public final static int BaseAttack = 25;
-    //constructor
-    public Skeleton(int lvl, Weapon weapon) {
-        super(lvl,1.25, weapon);
+    public Skeleton(int hp, int mp, Weapon weapon) {
+        super(hp, mp, weapon);
     }
-    //Special Ability
-    @Override
-    public void Special(Entity target) {
-        if(super.IsDead && !Resurrected)
-        {
-            if(super.getLevel() == 1)
-                Resurrected = true;
-            else {
-                Resurrected = false;
-                super.setLevel(super.getLevel()/2);
-            }
 
-            super.IsDead = false;
-            this.heal(super.getMaxHP()/4);
+    @Override
+    public void takeDamage(int damage) {
+        super.takeDamage(damage);
+        if (hp <= 0 && !resurrected) {
+            resurrected = true;
+            hp = 30; // Skeleton resurrects with 30 HP
+            System.out.println("The Skeleton has resurrected with " + hp + " HP!");
         }
     }
 
-    //get status shows resurrected
     @Override
-    public String getStatus() {
-        return "Skeleton" + " lvl." + getLevel()+ ": "
-                + "HP (" + getHP() + "/" + getMaxHP() + ") |"
-                + "Defending : " + "(" + isDefending() + ")"  + " | Resurrected: " + Resurrected;
-    }
-    @Override
-    public String toString(){
-        return "Skeleton" + " lvl." + getLevel();
+    public void attack(Player player) {
+        System.out.println("Skeleton attacks " + player.getName() + "!");
+        player.takeDamage(weapon.getDamage());
     }
 
-
-
-
-    //getter for resurrected
     @Override
-    public boolean isResurrected()
-    {
-        return this.Resurrected;
+    public void useSpecialAbility(Player player) {
+        // No special ability
+        System.out.println("Skeleton has no special abilities.");
     }
-
 }

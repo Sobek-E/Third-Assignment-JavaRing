@@ -1,12 +1,7 @@
 package org.project.object.consumables;
 
-import org.project.object.Object;
-
-// TODO: UPDATE IMPLEMENTATION
-public abstract class Consumable implements Object {
-    private boolean consumed;
-
-    public void Consume() {
-        consumed = true;
+public class Flask extends Consumable {
+    public Flask() {
+        super(25); // Heals 25 HP
     }
 }
